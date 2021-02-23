@@ -47,6 +47,7 @@ for i in $(lsblk -dp | grep -o '^/dev/sd[^ ]*'); do
 
 done
 
+
 echo -e "\n"
 faultyDiskList=""
 faultyDiskFound=1
