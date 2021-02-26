@@ -47,7 +47,6 @@ for i in $(lsblk -dp | grep -o '^/dev/sd[^ ]*'); do
 
 done
 
-
 echo -e "\n"
 faultyDiskList=""
 faultyDiskFound=1
@@ -76,7 +75,20 @@ do
     
 done < "$input"
 
-# CHECK MDADM for failed or detached, then write serial to faultyDisks.dat
+
+IFS=$'\n' mdadmFaultyList=( $(mdadm --detail /dev/md127 | grep faulty) )
+for mdadmFaultyLine in "${mdadmFaultyList[@]}"; do
+    IFS='/' read -ra mdadmFaultyArr <<< "$mdadmFaultyLine"
+    echo ${mdadmFaultyArr[2]};
+    devDesc="/dev/"${mdadmFaultyArr[2]};
+    SerialReturn=$(udevadm info --query=all --name=$devDesc | grep ID_SERIAL_SHORT;);
+	SerialNo=$(cut -d "=" -f2 <<< $SerialReturn);
+    SerialNo=${SerialNo//[^[:alnum:]]/};
+    echo $SerialNo;
+    faultyDiskList=${faultyDiskList}$SerialNo"\n";
+done
+
+
 
 touch faultyDisks.dat;
 echo -e $faultyDiskList > faultyDisks.dat;
