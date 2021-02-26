@@ -1,5 +1,9 @@
 #!/bin/bash
 
+sudo umount /media/*/*;
+sudo mdadm /dev/md127 -r detached
+sudo mdadm /dev/md127 -r failed
+
 for i in $(lsblk -dp | grep -o '^/dev/sd[^ ]*'); do
 
     SerialReturn=$(udevadm info --query=all --name=$i | grep ID_SERIAL_SHORT;);
@@ -47,9 +51,6 @@ for i in $(lsblk -dp | grep -o '^/dev/sd[^ ]*'); do
     fi
 
 done
-
-sudo mdadm /dev/md127 -r detached
-sudo mdadm /dev/md127 -r failed
 
 serialList=""
 for i in $(lsblk -dp | grep -o '^/dev/sd[^ ]*'); do
