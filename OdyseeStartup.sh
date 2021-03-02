@@ -53,6 +53,7 @@ echo ""
 diskList=""
 serialList=""
 
+sudo umount /media/*/*;
 sudo umount /mnt/*;
 sudo mdadm --stop /dev/md127;
 
