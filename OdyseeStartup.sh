@@ -140,8 +140,8 @@ then
     sudo sed -i "/\/dev\/md127.*/d" /etc/fstab;
     sleep 1;
     sudo echo -e "/dev/md127  $mountPoint  xfs defaults    0   0" | sudo tee -a /etc/fstab;
-    #sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf;
-    #sudo update-initramfs -u;
+    sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf;
+    sudo update-initramfs -u;
     sudo reboot now;
 fi
 
