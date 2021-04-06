@@ -26,4 +26,4 @@ Put "hddTest.sh" into crontab to run periodically and it will generate a "faulty
 
 $ sudo ./replaceDisk.sh
 
-      Run this script after replacing the faulty disk. New disk will be added to RAID array and missing one will be removed from RAID array.
+Run this script after replacing the faulty disk. New disk will be added to RAID array and missing one will be removed from RAID array.
