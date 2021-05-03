@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install mdadm;
+sudo apt-get -y install mdadm xfsprogs;
 
 user=$(id -u -n);
 group=$(id -g -n);
