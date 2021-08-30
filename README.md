@@ -14,7 +14,7 @@ $ sudo ./OdyseeStartup.sh
 
 Note 1 : It will configure RAID and generate "serialList.dat" which includes serial numbers of disks installed. Please do not modify or delete the serial list file.
 
-Note 2 : MDADM needs about 3 days to rebuild the spare disk. If user lose any disk during this time, RAID will fail.
+Note 2 : MDADM needs about 3 days to rebuild the spare disk. During the rebuild, the disk array is available for use. If user lose any disk during this time, RAID will fail.
 
 
 **For HDD Test :**
