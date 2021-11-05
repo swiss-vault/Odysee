@@ -75,7 +75,7 @@ do
     
 done < "$input"
 
-
+failedDiskFound=0;
 IFS=$'\n' mdadmFaultyList=( $(mdadm --detail /dev/md127 | grep faulty) )
 for mdadmFaultyLine in "${mdadmFaultyList[@]}"; do
     IFS='/' read -ra mdadmFaultyArr <<< "$mdadmFaultyLine"
@@ -86,9 +86,12 @@ for mdadmFaultyLine in "${mdadmFaultyList[@]}"; do
     SerialNo=${SerialNo//[^[:alnum:]]/};
     echo $SerialNo;
     faultyDiskList=${faultyDiskList}$SerialNo"\n";
+    failedDiskFound=1;
 done
 
 
-
-touch faultyDisks.dat;
-echo -e $faultyDiskList > faultyDisks.dat;
+if [ $failedDiskFound -eq 1 ];
+then
+	touch faultyDisks.dat;
+	echo -e $faultyDiskList > faultyDisks.dat;
+fi
