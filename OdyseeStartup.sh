@@ -142,10 +142,12 @@ then
     sudo echo -e "/dev/md127  $mountPoint  xfs defaults    0   0" | sudo tee -a /etc/fstab;
     sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf;
     sudo update-initramfs -u;
+    
+    
+    touch serialList.dat;
+    echo -e $serialList > serialList.dat;
+
+    echo "Disk configuration is completed."
+
     sudo reboot now;
 fi
-
-touch serialList.dat;
-echo -e $serialList > serialList.dat;
-
-echo "Disk configuration is completed."
